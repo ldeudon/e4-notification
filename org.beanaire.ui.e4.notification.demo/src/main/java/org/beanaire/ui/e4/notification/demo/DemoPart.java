@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
 public class DemoPart {
@@ -22,7 +23,11 @@ public class DemoPart {
 	private Combo combo;
 
 	private Text titleText, messageText;
+	
+	private Spinner spinner;
 
+	private Button blockedBtn;
+	
 	@Inject
 	public DemoPart() {
 		// TODO Your code here
@@ -46,6 +51,7 @@ public class DemoPart {
 				.applyTo(buttonsContainer);
 
 		Button tlButton = new Button(buttonsContainer, SWT.NONE);
+		tlButton.setEnabled(false);
 		tlButton.setText("Top Left Corner");
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(tlButton);
 
@@ -53,6 +59,7 @@ public class DemoPart {
 
 		Button trButton = new Button(buttonsContainer, SWT.NONE);
 		trButton.setText("Top Right Corner");
+		trButton.setEnabled(false);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(trButton);
 
 		new Label(buttonsContainer, SWT.NONE);
@@ -61,6 +68,7 @@ public class DemoPart {
 
 		Button blButton = new Button(buttonsContainer, SWT.NONE);
 		blButton.setText("Bottom Left Corner");
+		blButton.setEnabled(false);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(blButton);
 
 		new Label(buttonsContainer, SWT.NONE);
@@ -89,7 +97,7 @@ public class DemoPart {
 		combo = new Combo(detailContainer, SWT.BORDER | SWT.READ_ONLY);
 		combo.add("Done");
 		combo.add("Info");
-		combo.add("Error");
+		combo.add("Warning");
 		combo.select(0);
 
 		new Label(detailContainer, SWT.NONE).setText("Title :");
@@ -102,22 +110,56 @@ public class DemoPart {
 		GridDataFactory.fillDefaults().grab(true, false).hint(-1, 50)
 				.applyTo(messageText);
 		messageText.setText("This is a notification.");
+		
+		new Label(detailContainer, SWT.NONE).setText("Duration :");
+		spinner = new Spinner(detailContainer, SWT.BORDER);
+		spinner.setSelection(5);
+		spinner.setMinimum(1);
+		spinner.setMaximum(60);
+		GridDataFactory.swtDefaults().hint(30, -1).applyTo(spinner);
+		messageText.setText("This is a notification.");
+		
+		new Label(detailContainer, SWT.NONE);
+		blockedBtn = new Button(detailContainer, SWT.CHECK);
+		blockedBtn.setText("Blocked");
+		blockedBtn.setSelection(false);
+		blockedBtn.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				spinner.setEnabled(!blockedBtn.getSelection());
+			}
+		});
 	}
 
 	private void showNotification(int corner) {
-		if (corner == 1) {
-
+		NotificationBuilder nb = NotificationBuilder.create().title(titleText.getText())
+				.message(messageText.getText()).duration(spinner.getSelection());
+		if(blockedBtn.getSelection()) {
+			nb.blocked();
 		}
-		if (corner == 2) {
-
+		if(combo.getSelectionIndex() == 0) {
+			nb.ok();
 		}
-		if (corner == 3) {
-
+		if(combo.getSelectionIndex() == 1) {
+			nb.info();
 		}
-		if (corner == 4) {
-			NotificationBuilder.create().title(titleText.getText())
-					.message(messageText.getText()).ok().show();
+		if(combo.getSelectionIndex() == 2) {
+			nb.warning();
 		}
+		
+//		if (corner == 1) {
+//
+//		}
+//		if (corner == 2) {
+//
+//		}
+//		if (corner == 3) {
+//
+//		}
+//		if (corner == 4) {
+//			
+//		}
+		nb.show();
 	}
 
 	@Focus

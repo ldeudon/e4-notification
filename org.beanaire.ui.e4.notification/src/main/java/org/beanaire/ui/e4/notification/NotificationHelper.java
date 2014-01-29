@@ -71,7 +71,7 @@ public class NotificationHelper {
 	/**
 	 * Fade in du shell.
 	 * <p>
-	 * Méthode trouvée sur le net.
+	 * Méthode trouvée sur le net et modifiée.
 	 * 
 	 * @param _shell
 	 */
@@ -87,6 +87,12 @@ public class NotificationHelper {
 						Display.getDefault().timerExec(0, new FadeRunnable(popup.getShell(), true));
 					}
 				});
+				
+				
+				if(notification.duration < 0) {
+					// this notification is blocked, user has to close the popup.
+					return;
+				}
 				
 				try {
 					Thread.sleep(notification.duration * 1000);

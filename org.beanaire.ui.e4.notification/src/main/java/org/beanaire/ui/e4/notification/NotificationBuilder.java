@@ -24,7 +24,7 @@ public final class NotificationBuilder {
 		notification = new Notification();
 		title("Notification");
 		ok();
-		timer(15);
+		duration(15);
 	}
 	
 	/**
@@ -46,7 +46,7 @@ public final class NotificationBuilder {
 		return INSTANCE;
 	}
 	
-	public NotificationBuilder error() {
+	public NotificationBuilder warning() {
 		notification.type = SWT.ERROR;
 		return INSTANCE;
 	}
@@ -61,8 +61,13 @@ public final class NotificationBuilder {
 		return INSTANCE;
 	}
 
-	public  NotificationBuilder timer(int seconds) {
+	public NotificationBuilder duration(int seconds) {
 		notification.duration = seconds;
+		return INSTANCE;
+	}
+	
+	public NotificationBuilder blocked() {
+		notification.duration = -1;
 		return INSTANCE;
 	}
 	
