@@ -9,8 +9,10 @@ import org.eclipse.e4.ui.services.IStylingEngine;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -105,7 +107,9 @@ public class DemoPart {
 		GridDataFactory.swtDefaults().hint(100, -1).applyTo(titleText);
 		titleText.setText("Notification");
 
-		new Label(detailContainer, SWT.NONE).setText("Message :");
+		CLabel lblMessage = new CLabel(detailContainer, SWT.NONE);
+		lblMessage.setText("Message :");
+		
 		messageText = new Text(detailContainer, SWT.BORDER | SWT.MULTI);
 		GridDataFactory.fillDefaults().grab(true, false).hint(-1, 50)
 				.applyTo(messageText);
