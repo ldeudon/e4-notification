@@ -25,6 +25,7 @@ import org.eclipse.swt.graphics.Region;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
 public class NotificationPopup  {
@@ -58,6 +59,9 @@ public class NotificationPopup  {
 		/**
 		 * Create the shell
 		 */
+//		for(Monitor monitor : Display.getDefault().getMonitors()) {
+//			System.out.println(monitor);
+//		}
 		shell = new Shell(SWT.MODELESS | SWT.ON_TOP | SWT.NO_FOCUS | SWT.NO_TRIM);
 		shell.setBackgroundMode(SWT.INHERIT_DEFAULT);
 		shell.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);

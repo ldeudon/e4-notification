@@ -8,6 +8,7 @@ import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -119,8 +120,13 @@ public class NotificationHelper {
 	 * @return Position x, y
 	 */
 	private Point computePosition(int order) {
-		int x = Display.getDefault().getClientArea().width - NotificationPopup.WINDOW_WIDTH - 5;
-		int y = Display.getDefault().getClientArea().height	- (NotificationPopup.WINDOW_HEIGHT * order) - (5 * order);
+		Monitor monitor = null;
+		if(Display.getDefault().getMonitors().length > 0) {
+			monitor = Display.getDefault().getMonitors()[0];
+		}
+		
+		int x = monitor.getClientArea().x + monitor.getClientArea().width - NotificationPopup.WINDOW_WIDTH - 5;
+		int y = monitor.getClientArea().height	- (NotificationPopup.WINDOW_HEIGHT * order) - (5 * order);
 		return new Point(x, y);
 	}
 
