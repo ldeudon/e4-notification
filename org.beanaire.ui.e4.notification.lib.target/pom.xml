@@ -9,8 +9,8 @@
 
 	<parent>
 		<groupId>org.beanaire.ui.e4.notification</groupId>
-		<artifactId>org.beanaire.ui.e4.notification.lib.parent</artifactId>
-		<version>1.1.0</version>
-		<relativePath>../org.beanaire.ui.e4.notification.lib.parent/pom.xml</relativePath>
+		<artifactId>org.beanaire.ui.e4.notification.parent</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
+		<relativePath>../org.beanaire.ui.e4.notification.parent/pom.xml</relativePath>
 	</parent>
 </project>
