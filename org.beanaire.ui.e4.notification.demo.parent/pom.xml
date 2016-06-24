@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>org.beanaire.ui.e4.notification.demo.parent</artifactId>
+
+	<packaging>pom</packaging>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<target>
+						<artifact>
+							<groupId>org.beanaire.ui.e4.notification</groupId>
+							<!-- This plugin expects exactly one file (<artifactId>.target) in 
+								the project's base directory. -->
+							<artifactId>org.beanaire.ui.e4.notification.demo.target</artifactId>
+							<version>1.0.1-SNAPSHOT</version>
+						</artifact>
+					</target>
+
+					<environments>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<modules>
+		<module>../org.beanaire.ui.e4.notification.demo.target</module>
+		<module>../org.beanaire.ui.e4.notification.demo</module>
+		<module>../org.beanaire.ui.e4.notification.demo.feature</module>
+		<module>../org.beanaire.ui.e4.notification.demo.product</module>
+	</modules>
+
+	<parent>
+		<groupId>org.beanaire.ui.e4.notification</groupId>
+		<artifactId>org.beanaire.ui.e4.notification.parent</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
+		<relativePath>../org.beanaire.ui.e4.notification.parent</relativePath>
+	</parent>
+</project>
